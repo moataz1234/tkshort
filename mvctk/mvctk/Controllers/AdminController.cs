@@ -9,8 +9,23 @@ namespace mvctk.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+        private SQLContext DB = null;
+
+        public AdminController()
+        {
+            DB = new SQLContext();
+        }
         public ActionResult Admin(user user)
+        {
+            return View();
+        }
+        public ActionResult GetCoursesByJason()
+        {
+            return Json(DB.courses, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public ActionResult AddCourse()
         {
             return View();
         }
