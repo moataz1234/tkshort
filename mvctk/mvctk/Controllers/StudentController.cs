@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace mvctk.Controllers
 {
-    public class UserController : Controller
+    public class StudentController : Controller
     {
-        // GET: User
-        public ActionResult Index()
+        // GET: Student
+        public ActionResult Student()
         {
             return View();
         }

@@ -1,0 +1,30 @@
+﻿@model mvctk.Models.user
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Enter</title>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Submit", "Login", FormMethod.Post))
+        {
+            <i>user Name:</i> @Html.TextBoxFor(Model => Model.ID)@Html.ValidationMessageFor(model => model.ID)
+            <br />
+            <i>password :</i> @Html.TextBoxFor(Model => Model.PassWord) @Html.ValidationMessageFor(model => model.PassWord)
+            <br />
+  
+            <input id="Submit1" type="submit" value="Register Customer" />
+        }
+    </div>
+</body>
+</html>
