@@ -32,7 +32,13 @@ namespace mvctk.Controllers
                     if (ModelState.IsValid)
                     {
                         if (Logged.UserTyper == 0)
-                            return RedirectToAction("Student", "Student");
+                            return RedirectToAction("Student", "Student",Logged);
+                        
+                        if (Logged.UserTyper == 1)
+                            return RedirectToAction("Lecturer", "Lecturer", Logged);
+
+                        if (Logged.UserTyper == 2)
+                            return RedirectToAction("Admin", "Admin", Logged);
                     }
                 }
             }
