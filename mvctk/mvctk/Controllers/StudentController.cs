@@ -19,7 +19,7 @@ namespace mvctk.Controllers
         public ActionResult Student(user user)
         {
            
-            return View();
+            return View(user);
         }
     }
 }

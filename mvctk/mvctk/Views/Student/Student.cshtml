@@ -1,4 +1,4 @@
-﻿
+﻿@model mvctk.Models.user
 @{
     Layout = null;
 }
@@ -11,8 +11,10 @@
     <title>Student</title>
 </head>
 <body>
-    <div> 
-        Hiii!!!
-    </div>
+    <div>
+        <td>
+            <center> <h1>Welcome  @Html.DisplayFor(x => x.FirstName) @Html.DisplayFor(x => x.LastName) </h1></center>
+        </td>
+        </div>
 </body>
 </html>
