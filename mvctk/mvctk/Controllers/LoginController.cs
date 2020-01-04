@@ -9,6 +9,12 @@ namespace mvctk.Controllers
 {
     public class LoginController : Controller
     {
+        private SQLContext DB = null;
+
+        public LoginController() {
+
+            DB = new SQLContext();
+        }
 
         public ActionResult signin()
         {
@@ -17,14 +23,21 @@ namespace mvctk.Controllers
         [HttpPost]
         public ActionResult Submit(user user)
         {
-            if (ModelState.IsValid)
+            var Logged = DB.users.FirstOrDefault(x => x.ID.Equals(user.ID));
+            if (Logged != null)
             {
-                return RedirectToAction("Student", "Student");
+                if (Logged.PassWord.Equals(user.PassWord))
+                {
+
+                    if (ModelState.IsValid)
+                    {
+                        if (Logged.UserTyper == 0)
+                            return RedirectToAction("Student", "Student");
+                    }
+                }
             }
-            else
-            {
-                return View("signin", user);
-            }
+            return View("signin", user);
+            
         }
         
       
