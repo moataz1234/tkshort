@@ -81,9 +81,13 @@
             </td>
             <td>
 
-                @* @Html.ActionLink("Edit", "Edit", new { id = item.Id }) *@
+                @* @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
 
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+
+                @Html.ActionLink("delete", "Index", new { id = item.Id })
 
             </td>
         </tr>
