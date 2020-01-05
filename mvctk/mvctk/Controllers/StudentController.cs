@@ -11,24 +11,36 @@ namespace mvctk.Controllers
     public class StudentController : Controller
     {
         private SQLContext DB = null;
-
+        
         public StudentController()
         {
             DB = new SQLContext();
         }
         
+        
         public ActionResult Student(user user)
         {
-           
+            Session["user"] = user.ID.ToString();
             return View(user);
         }
 
-        public ActionResult ShowStudents()
+        public ActionResult Schedule()
         {
+            
+             List<string> user_courses = new List<string>();
+            foreach (grade g in DB.grades)
+                if (g.StudentID.Equals( Session["user"]))
+                    user_courses.Add(g.CourseID);
 
-            return View(DB.users.ToList());
+                        List<course> crs = new List<course>();
+
+            foreach (String s in user_courses)
+
+                crs.Add(DB.courses.Find(s));
+
+            return View(crs);
+
+           
         }
-
-
     }
 }

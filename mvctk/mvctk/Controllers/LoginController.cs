@@ -23,24 +23,29 @@ namespace mvctk.Controllers
         [HttpPost]
         public ActionResult Submit(user user)
         {
-            var Logged = DB.users.FirstOrDefault(x => x.ID.Equals(user.ID));
+            if (ModelState.IsValid)
+            {
+                var Logged = DB.users.FirstOrDefault(x => x.ID.Equals(user.ID));
             if (Logged != null)
             {
-                if (Logged.PassWord.Equals(user.PassWord))
-                {
-
-                    if (ModelState.IsValid)
+                    if (Logged.PassWord.Equals(user.PassWord))
                     {
+
+
                         if (Logged.UserTyper == 0)
-                            return RedirectToAction("Student", "Student",Logged);
-                        
+                            return RedirectToAction("Student", "Student", Logged);
+
                         if (Logged.UserTyper == 1)
                             return RedirectToAction("Lecturer", "Lecturer", Logged);
 
                         if (Logged.UserTyper == 2)
                             return RedirectToAction("Admin", "Admin", Logged);
                     }
+                    else
+                        ModelState.AddModelError("FirstName", "The username or password is incorrect");
                 }
+            else
+                    ModelState.AddModelError("FirstName", "The username or password is incorrect");
             }
             return View("signin", user);
             
