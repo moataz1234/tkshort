@@ -9,6 +9,7 @@ namespace mvctk.Models
     [Table("course")]
     public partial class course
     {
+        [Key]
         [StringLength(50)]
         public string ID { get; set; }
 
@@ -17,17 +18,20 @@ namespace mvctk.Models
 
         public int? Points { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? ExamA { get; set; }
+        [StringLength(50)]
+        public string ExamA { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? ExamB { get; set; }
+        [StringLength(50)]
+        public string ExamB { get; set; }
 
         [StringLength(50)]
         public string LecturerID { get; set; }
 
         [StringLength(50)]
         public string Time { get; set; }
+        
+        [StringLength(50)]
+        public string Day { get; set; }
 
         [StringLength(50)]
         public string ClassRoom { get; set; }
