@@ -29,6 +29,9 @@ namespace mvctk.Models
 
         [StringLength(50)]
         public string Time { get; set; }
+        
+        [StringLength(50)]
+        public string Day { get; set; }
 
         [StringLength(50)]
         public string ClassRoom { get; set; }

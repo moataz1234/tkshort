@@ -40,6 +40,9 @@
                 @Html.DisplayNameFor(model => model.Time)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Day)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ClassRoom)
             </th>
             <th></th>
@@ -71,9 +74,18 @@
                 @Html.DisplayFor(modelItem => item.Time)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.ClassRoom)
             </td>
+            <td>
 
+                @* @Html.ActionLink("Edit", "Edit", new { id = item.Id }) *@
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+
+            </td>
         </tr>
         }
 

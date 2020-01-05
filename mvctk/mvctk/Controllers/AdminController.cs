@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using mvctk.DAL;
@@ -72,29 +73,70 @@ namespace mvctk.Controllers
             return View(model);
         }
 
-       /* [HttpPost]
-        public ActionResult Submit()
+        public ActionResult Delete(int? id)
         {
-            CourseViewModel cvm = new CourseViewModel();
-            course objCourse = new course();
-            objCourse.ID = Request.Form["course.ID"].ToString();
-            objCourse.Name = Request.Form["course.Name"].ToString();
-            objCourse.Points = Int32.Parse(Request.Form["course.Points"]);
-            objCourse.ExamA = Request.Form["course.ExamB"].ToString();
-            objCourse.ExamB = Request.Form["course.ExamB"].ToString();
-            objCourse.LecturerID = Request.Form["course.LecturerID"].ToString();
-            objCourse.Time = Request.Form["course.Time"].ToString();
-            objCourse.ClassRoom = Request.Form["course.ClassRoom"].ToString();
-            CourseDal dal = new CourseDal();
+
+            if (id == null)
+
+            {
+
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            }
+
+            course course = DB.courses.Find((id).ToString());
+
+            if (course == null)
+            {
+
+                return HttpNotFound();
+
+            }
+
+            return View(course);
+
+        }
 
 
-            dal.Courses.Add(objCourse);
-            dal.SaveChanges();
-            cvm.course = objCourse;
 
-            cvm.courses = dal.Courses.ToList<course>();
-            return View("AddCourse", cvm);
-        }*/
+        [HttpPost, ActionName("Delete")]
+
+        public ActionResult DelteConfirmed(int id)
+
+        {
+
+            course course = DB.courses.Find(id.ToString());
+
+            DB.courses.Remove(course);
+
+            DB.SaveChanges();
+
+            return RedirectToAction("Index");
+
+        }
+        /* [HttpPost]
+         public ActionResult Submit()
+         {
+             CourseViewModel cvm = new CourseViewModel();
+             course objCourse = new course();
+             objCourse.ID = Request.Form["course.ID"].ToString();
+             objCourse.Name = Request.Form["course.Name"].ToString();
+             objCourse.Points = Int32.Parse(Request.Form["course.Points"]);
+             objCourse.ExamA = Request.Form["course.ExamB"].ToString();
+             objCourse.ExamB = Request.Form["course.ExamB"].ToString();
+             objCourse.LecturerID = Request.Form["course.LecturerID"].ToString();
+             objCourse.Time = Request.Form["course.Time"].ToString();
+             objCourse.ClassRoom = Request.Form["course.ClassRoom"].ToString();
+             CourseDal dal = new CourseDal();
+
+
+             dal.Courses.Add(objCourse);
+             dal.SaveChanges();
+             cvm.course = objCourse;
+
+             cvm.courses = dal.Courses.ToList<course>();
+             return View("AddCourse", cvm);
+         }*/
 
 
     }
