@@ -66,7 +66,7 @@ namespace mvctk.Controllers
             return View(model);
         }
 
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(String id)
         {
 
             if (id == null)
@@ -77,7 +77,7 @@ namespace mvctk.Controllers
 
             }
 
-            course course = DB.courses.Find((id).ToString());
+            course course = DB.courses.Find(id);
 
             if (course == null)
             {
@@ -92,13 +92,13 @@ namespace mvctk.Controllers
 
 
 
-        [HttpPost]//, ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
 
-        public ActionResult DelteConfirmed(int id)
+        public ActionResult DelteConfirmed(string id)
 
         {
 
-            course course = DB.courses.Find(id.ToString());
+            course course = DB.courses.Find(id);
 
             DB.courses.Remove(course);
 
