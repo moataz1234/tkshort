@@ -37,13 +37,6 @@ namespace mvctk.Controllers
 
         public ActionResult AddCourse()
         {
-            /*   CourseDal dal = new CourseDal();
-               List<course> objCourses = dal.Courses.ToList<course>();
-               CourseViewModel cvm = new CourseViewModel();
-
-               cvm.courses = new List<course>();
-               cvm.courses = objCourses;
-               return View(cvm);*/
             return View();
         }
 
@@ -99,7 +92,7 @@ namespace mvctk.Controllers
 
 
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]//, ActionName("Delete")]
 
         public ActionResult DelteConfirmed(int id)
 
@@ -114,30 +107,5 @@ namespace mvctk.Controllers
             return RedirectToAction("Index");
 
         }
-        /* [HttpPost]
-         public ActionResult Submit()
-         {
-             CourseViewModel cvm = new CourseViewModel();
-             course objCourse = new course();
-             objCourse.ID = Request.Form["course.ID"].ToString();
-             objCourse.Name = Request.Form["course.Name"].ToString();
-             objCourse.Points = Int32.Parse(Request.Form["course.Points"]);
-             objCourse.ExamA = Request.Form["course.ExamB"].ToString();
-             objCourse.ExamB = Request.Form["course.ExamB"].ToString();
-             objCourse.LecturerID = Request.Form["course.LecturerID"].ToString();
-             objCourse.Time = Request.Form["course.Time"].ToString();
-             objCourse.ClassRoom = Request.Form["course.ClassRoom"].ToString();
-             CourseDal dal = new CourseDal();
-
-
-             dal.Courses.Add(objCourse);
-             dal.SaveChanges();
-             cvm.course = objCourse;
-
-             cvm.courses = dal.Courses.ToList<course>();
-             return View("AddCourse", cvm);
-         }*/
-
-
     }
 }
