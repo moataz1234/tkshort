@@ -8,6 +8,31 @@
 
 <html>
 <head>
+    <style>
+        div {
+            border-bottom:solid;
+            border-bottom-color:black;
+
+        }
+        input[type=submit] {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+        
+        
+      
+    </style>
     <meta name="viewport" content="width=device-width" />
     <title>Enter</title>
     <script src="~/Scripts/jquery-3.3.1.js"></script>
@@ -15,16 +40,50 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 </head>
 <body>
-    <div>
-        @using (Html.BeginForm("Submit", "Login", FormMethod.Post))
-        {
-            <i>user Name:</i> @Html.TextBoxFor(Model => Model.ID)@Html.ValidationMessageFor(model => model.ID)
-            <br />
-            <i>password :</i> @Html.TextBoxFor(Model => Model.PassWord) @Html.ValidationMessageFor(model => model.PassWord)
-            <br />
-  
-            <input id="Submit1" type="submit" value="Register Customer" />
-        }
-    </div>
+    <center>
+                <div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </div>
+            
+                <div style="background-color:lightgreen">
+
+
+                    <br />
+                    <br />
+                    <br />
+                    @using (Html.BeginForm("Submit", "Login", FormMethod.Post))
+                    {
+
+                        <i><font size="6">User Name:</font></i> @Html.TextBoxFor(Model => Model.ID) @Html.ValidationMessageFor(model => model.ID)
+
+
+                        <br />
+                        <br />
+                        <br />
+                        <i><font size="6">Password :</font></i> @Html.TextBoxFor(Model => Model.PassWord) @Html.ValidationMessageFor(model => model.PassWord)
+                        <br />
+                        <br />
+                        <br />
+
+                        <input id="Submit1" type="submit" value="LogIn" />
+                        <br />
+                        <br />
+                        <br />
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                        <br />
+                        <br />
+                        <br />
+
+                    }
+
+    </center>
+             </div>
+
+    
+   
+    
 </body>
 </html>

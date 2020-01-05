@@ -7,7 +7,7 @@ namespace mvctk.Models
     using System.Data.Entity.Spatial;
 
     public partial class user
-    {
+    {   [Required]
         [StringLength(50)]
         public string ID { get; set; }
 
@@ -18,6 +18,7 @@ namespace mvctk.Models
         public string LastName { get; set; }
 
         [StringLength(50)]
+        [Required]
         public string PassWord { get; set; }
 
         [StringLength(50)]

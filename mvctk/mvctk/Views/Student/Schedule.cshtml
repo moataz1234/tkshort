@@ -1,4 +1,4 @@
-﻿@model IEnumerable<mvctk.Models.@event>
+﻿@model IEnumerable<mvctk.Models.course>
 
 @{
     Layout = null;
@@ -9,32 +9,27 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Show users</title>
+    <title>Schedule</title>
 </head>
-<body>
+<body><center>
     <p>
-       Show users:
+        Schedule
     </p>
     <table class="table">
         <tr>
+
             <th>
-                ID
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Day)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model.Time)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PassWord)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserTyper)
+                @Html.DisplayNameFor(model => model.ClassRoom)
             </th>
             <th></th>
         </tr>
@@ -43,29 +38,25 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelutem => item.ID)
+                    @Html.DisplayFor(modelutem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
+                    @Html.DisplayFor(modelItem => item.Day)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
+                    @Html.DisplayFor(modelItem => item.Time)
                 </td>
-                
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.Email)
+                    @Html.DisplayFor(modelItem => item.ClassRoom)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PassWord)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserTyper)
-                </td>
-                
+
+
             </tr>
         }
 
     </table>
+</center>
 </body>
 </html>
 
