@@ -23,12 +23,37 @@ namespace mvctk.Controllers
             return View(user);
         }
 
-        public ActionResult ShowStudents()
+        public ActionResult Schedule(user user)
         {
+            List<@event> ev = new List<@event>();
+             List<string> user_courses = new List<string>();
+            foreach (grade g in DB.grades)
+                if (g.StudentID == user.ID)
+                    user_courses.Add(g.CourseID);
 
-            return View(DB.users.ToList());
+
+            foreach (String s in user_courses)
+                foreach (course c in DB.courses)
+
+                    if (s == c.ID)
+                    {
+                        ev.Add(new @event(c.Name, c.Time, c.ClassRoom));
+                    }
+                        
+             return View(ev);
+
+            //public ActionResult Schedual()
+            //{
+
+            //    return View(DB.users.ToList());
+            //}
+            public ActionResult ShowStudents()
+            {
+
+                return View(DB.users.ToList());
+            }
+
+
         }
-
-
     }
 }
