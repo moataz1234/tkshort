@@ -1,0 +1,70 @@
+﻿@model IEnumerable<mvctk.Models.course>
+
+@*@{
+        Layout = null;
+    }*@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Schedule</title>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExamA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th>
+                Class Room For Exam A
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExamB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th>
+                Class Room For Exam B
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelutem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExamA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassRoom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExamB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassRoom)
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

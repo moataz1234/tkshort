@@ -1,4 +1,4 @@
-﻿
+﻿@model mvctk.Models.user
 @{
     Layout = null;
 }
@@ -11,7 +11,29 @@
     <title>Lecturer</title>
 </head>
 <body>
-    <div> 
+    <div>
+        <tr>
+            <td>
+                <center> <h1>Welcome  @Html.DisplayFor(x => x.FirstName) @Html.DisplayFor(x => x.LastName) </h1></center>
+            </td>
+        </tr>
+
+        <center>
+            <table>
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td>
+                        <i>        Schedule: </i> @Html.ActionLink("Schedule", "Schedule")
+                    </td>
+                    <br />
+                    <td>
+                        <i>       Exams Schedule: </i> @Html.ActionLink("ExamSchedule", "ExamSchedule")
+                    </td>
+                </tr>
+            </table>
+        </center>
     </div>
 </body>
 </html>

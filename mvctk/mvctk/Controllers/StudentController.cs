@@ -42,7 +42,7 @@ namespace mvctk.Controllers
 
            
         }
-        public ActionResult ExamSchedual()
+        public ActionResult ExamSchedule()
         {
             List<string> user_courses = new List<string>();
             foreach (grade g in DB.grades)
