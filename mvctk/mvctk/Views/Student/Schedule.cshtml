@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<mvctk.Models.course>
 
-@{
-    Layout = null;
-}
+@*@{
+        Layout = null;
+    }*@
 
 <!DOCTYPE html>
 
@@ -11,17 +11,12 @@
     <meta name="viewport" content="width=device-width" />
     <title>Schedule</title>
 </head>
-<body><center>
-    <p>
-        Schedule
-    </p>
+<body>
     <table class="table">
         <tr>
-
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-
             <th>
                 @Html.DisplayNameFor(model => model.Day)
             </th>
@@ -46,17 +41,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Time)
                 </td>
-
                 <td>
                     @Html.DisplayFor(modelItem => item.ClassRoom)
                 </td>
-
-
             </tr>
         }
 
     </table>
-</center>
 </body>
 </html>
-
