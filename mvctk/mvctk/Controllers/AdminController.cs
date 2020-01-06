@@ -24,18 +24,14 @@ namespace mvctk.Controllers
         {
             return View();
         }
-        public ActionResult Index()
+
+
+        public ActionResult update()
         {
-            return View(DB.courses);
+            return View(DB.grades);
         }
 
-        public ActionResult GetCoursesByJason()
-        {
-            CourseDal dal = new CourseDal();
-            List<course> objCourses = dal.Courses.ToList<course>();
-            return Json(objCourses, JsonRequestBehavior.AllowGet);
 
-        }
 
         public ActionResult AddCourse()
         {
@@ -66,6 +62,11 @@ namespace mvctk.Controllers
 
 
             return View(model);
+        }
+
+        public ActionResult Index()
+        {
+            return View(DB.courses);
         }
 
         public ActionResult Delete(String id)
@@ -156,5 +157,49 @@ namespace mvctk.Controllers
             return View(course);
 
         }
+       /* public ActionResult updategrade(string id)
+        {
+
+            if (id == null)
+
+            {
+
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            }
+
+            course grade = DB.courses.Find(id);
+
+            if (course == null)
+
+            {
+
+                return HttpNotFound();
+
+            }
+
+            return View(course);
+
+        }
+
+        [HttpPost]
+
+        public ActionResult updategrade(grade grade)
+
+        {
+
+            if (ModelState.IsValid)
+
+            {
+
+                DB.Entry(grade).State = EntityState.Modified;
+
+                DB.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            return View(grade);
+
+        }*/
     }
 }
