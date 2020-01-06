@@ -22,13 +22,15 @@ namespace mvctk.Controllers
         {
             return View(DB.grades);
         }
-        public ActionResult Edit(string id)
+
+        public ActionResult Edit(string id1,string id2)
         {
-            if (id == null)
+            
+            if (string.IsNullOrEmpty(id1) || string.IsNullOrEmpty(id2))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            grade grade = DB.grades.Find(id);
+            var grade = DB.grades.FirstOrDefault(x => x.StudentID.Equals(id1) && x.CourseID.Equals(id2));
             if (grade == null)
             {
                 return HttpNotFound();
@@ -36,15 +38,35 @@ namespace mvctk.Controllers
             return View(grade);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(grade grade)
         {
-            if (ModelState.IsValid)
+
+            try
             {
-                DB.Entry(grade).State = EntityState.Modified;
+                var grad = DB.grades.First(s => s.CourseID.Equals(grade.CourseID) && s.StudentID.Equals(grade.StudentID));
+                grad.CourseID = grade.CourseID;
+                grad.GradeA = grade.GradeA;
+                grad.GradeB = grade.GradeB;
+                grad.StudentID = grade.StudentID;
+               // DB.Entry(grade).State = EntityState.Modified;
                 DB.SaveChanges();
                 return RedirectToAction("show");
             }
+            catch(Exception ex)
+            {
+
+            }
+            
             return View(grade);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                DB.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
