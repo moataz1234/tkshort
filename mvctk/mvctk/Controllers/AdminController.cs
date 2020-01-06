@@ -6,8 +6,10 @@ using System.Web;
 using System.Web.Mvc;
 using mvctk.DAL;
 using mvctk.Models;
+using System.Data.Entity;
 using mvctk.ViewModel;
 namespace mvctk.Controllers
+
 {
     public class AdminController : Controller
     {
@@ -68,7 +70,7 @@ namespace mvctk.Controllers
 
         public ActionResult Delete(String id)
         {
-
+            Session["ID"] = id;
             if (id == null)
 
             {
@@ -105,6 +107,53 @@ namespace mvctk.Controllers
             DB.SaveChanges();
 
             return RedirectToAction("Index");
+
+        }
+
+        public ActionResult Edit(string id)
+        {
+
+            if (id == null)
+
+            {
+
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            }
+
+            course course = DB.courses.Find(id);
+
+            if (course == null)
+
+            {
+
+                return HttpNotFound();
+
+            }
+
+            return View(course);
+
+        }
+
+        [HttpPost]
+
+        public ActionResult Edit(course course)
+
+        {
+
+            if (ModelState.IsValid)
+
+            {
+
+                DB.Entry(course).State = EntityState.Modified;
+
+                DB.SaveChanges();
+
+                return RedirectToAction("Index");
+
+            }
+
+            return View(course);
 
         }
     }
