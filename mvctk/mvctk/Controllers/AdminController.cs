@@ -25,14 +25,6 @@ namespace mvctk.Controllers
             return View();
         }
 
-
-        public ActionResult update()
-        {
-            return View(DB.grades);
-        }
-
-
-
         public ActionResult AddCourse()
         {
             return View();
@@ -41,9 +33,6 @@ namespace mvctk.Controllers
         [HttpPost]
         public ActionResult Submit(course model)
         {
-            var lecturerlist = DB.users.Where(x => x.UserTyper == 1).ToList();
-
-            ViewData["lects"] = lecturerlist;
 
             if (ModelState.IsValid)
 
@@ -56,10 +45,6 @@ namespace mvctk.Controllers
                 return RedirectToAction("Index");
 
             }
-
-            List<Object> list = new List<Object>();
-
-
 
             return View(model);
         }
@@ -141,7 +126,6 @@ namespace mvctk.Controllers
         public ActionResult Edit(course course)
 
         {
-
             if (ModelState.IsValid)
 
             {
@@ -157,20 +141,22 @@ namespace mvctk.Controllers
             return View(course);
 
         }
-       /* public ActionResult updategrade(string id)
+        //========================================================================================//
+        public ActionResult index2()
         {
+            return View(DB.grades);
+        }
 
-            if (id == null)
-
+        public ActionResult update(string idstudent)
+        {
+            if (idstudent == null)
             {
-
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
             }
 
-            course grade = DB.courses.Find(id);
+            grade grade = DB.grades.Find(idstudent);
 
-            if (course == null)
+            if (grade == null)
 
             {
 
@@ -178,28 +164,44 @@ namespace mvctk.Controllers
 
             }
 
-            return View(course);
+            return View(grade);
 
         }
 
         [HttpPost]
-
-        public ActionResult updategrade(grade grade)
-
+        public ActionResult update(grade grade)
         {
-
             if (ModelState.IsValid)
-
             {
-
                 DB.Entry(grade).State = EntityState.Modified;
 
                 DB.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("update");
             }
             return View(grade);
 
-        }*/
+        }
+        [HttpPost]
+        public ActionResult submitgrade(grade model)
+        {
+            if (ModelState.IsValid)
+
+            {
+
+                DB.grades.Add(model);
+
+                DB.SaveChanges();
+
+                return RedirectToAction("update");
+
+            }
+
+            List<Object> list = new List<Object>();
+
+
+
+            return View(model);
+        }
     }
 }
