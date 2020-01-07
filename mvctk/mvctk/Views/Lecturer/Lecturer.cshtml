@@ -8,7 +8,29 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Lecturer</title>
+    <title>Student</title>
+    <style>
+        div {
+            border-bottom: solid;
+            border-bottom-color: black;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            -webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        }
+    </style>
 </head>
 <body>
     <div>
@@ -17,23 +39,51 @@
                 <center> <h1>Welcome  @Html.DisplayFor(x => x.FirstName) @Html.DisplayFor(x => x.LastName) </h1></center>
             </td>
         </tr>
+    </div>
+    <center>
 
-        <center>
-            <table>
-                <tr></tr>
-                <tr></tr>
-                <tr></tr>
-                <tr>
-                    <td>
-                        <i>        Schedule: </i> @Html.ActionLink("Schedule", "Schedule")
-                    </td>
+        <div style="background-color:lightgreen">
+            <tr>
+                <br />
+                <br />
+                <br />
+                <br />
+
+                @using (Html.BeginForm("Schedule", "Lecturer", FormMethod.Post))
+                {
+                    <input type="submit" value="Class Schedule" />
                     <br />
-                    <td>
-                        <i>       Exams Schedule: </i> @Html.ActionLink("ExamSchedule", "ExamSchedule")
-                    </td>
-                </tr>
-            </table>
-        </center>
+                    <br />
+                    <br />
+                    <br />
+                }
+                @using (Html.BeginForm("ExamSchedule", "Lecturer", FormMethod.Post))
+                {
+
+                    <input type="submit" value="Exams Schedule" />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                }
+                @using (Html.BeginForm("ShowStudents", "Lecturer", FormMethod.Post))
+                {
+
+                    <input type="submit" value="Exams Schedule" />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                }
+
+
+</center>
     </div>
 </body>
 </html>

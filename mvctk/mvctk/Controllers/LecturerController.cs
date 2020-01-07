@@ -16,7 +16,7 @@ namespace mvctk.Controllers
             DB = new SQLContext();
         }
 
-       
+
         public ActionResult Lecturer(user user)
         {
             Session["user"] = user.ID;
@@ -30,8 +30,8 @@ namespace mvctk.Controllers
                 if (c.LecturerID.Equals(Session["user"]))
                     Lecturer_courses.Add(c);
 
-                    return View(Lecturer_courses);
-            
+            return View(Lecturer_courses);
+
         }
         public ActionResult ExamSchedule()
         {
@@ -43,6 +43,26 @@ namespace mvctk.Controllers
             return View(Lecturer_courses);
 
         }
+        public ActionResult ShowStudents()
+        {
+            var lecid = Session["user"].ToString();
+            TempData["Courses"] = DB.courses.Where(x => x.LecturerID.Equals(lecid)).Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.ID
+            }).ToList();
+
+            return View();
+        }
+        
+        public ActionResult StudentsTable(string id)
+        {
+
+
+            return View();
+        }
+
+
 
     }
 }
