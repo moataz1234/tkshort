@@ -92,11 +92,12 @@ namespace mvctk.Controllers
                 foreach (grade g in DB.grades)
                     if (g.StudentID.Equals(studentid))
                         user_courses.Add(g.CourseID);
-                foreach (string s in user_courses) {
+                foreach (string s in user_courses)
+                {
                     temp1 = DB.courses.Find(s);
                     temp2 = DB.courses.Find(courseid);
 
-                    if (temp1.Day.Equals(temp2.Day) && temp1.Time.Equals(temp2.Time) && temp1!=temp2)
+                    if (temp1.Day.Equals(temp2.Day) && temp1.Time.Equals(temp2.Time) && temp1 != temp2)
                     {
                         flag = 1;
                     }
@@ -106,22 +107,27 @@ namespace mvctk.Controllers
                 var std = DB.users.FirstOrDefault(s => s.ID.Equals(model.StudentID));
                 var grad = DB.grades.FirstOrDefault(s => s.CourseID.Equals(model.CourseID) && s.StudentID.Equals(model.StudentID));
 
-                if (crs != null && std != null && grad == null)
+                if (crs != null && std != null)
                 {
-                    if (flag == 0)
+                    if (grad == null)
                     {
-                        if (std.UserTyper == 0)
+                        if (flag == 0)
                         {
-                            DB.grades.Add(model);
-                            DB.SaveChanges();
-                            return RedirectToAction("AddCourseToStudent");
+                            if (std.UserTyper == 0)
+                            {
+                                DB.grades.Add(model);
+                                DB.SaveChanges();
+                                return RedirectToAction("AddCourseToStudent");
+                            }
+                            else
+                                ModelState.AddModelError("StudentID", "student id is incorrect");
                         }
                         else
-                            ModelState.AddModelError("StudentID", "student id is incorrect");
+                            ModelState.AddModelError("CourseID", "There are conflict with onther course at the same time");
+
                     }
                     else
-                        ModelState.AddModelError("CourseID", "There are conflict with onther course at the same time");
-
+                        ModelState.AddModelError("CourseID", "Already having this Course");
 
                 }
                 else
