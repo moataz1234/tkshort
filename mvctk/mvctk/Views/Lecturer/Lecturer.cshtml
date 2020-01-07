@@ -72,14 +72,22 @@
                 @using (Html.BeginForm("ShowStudents", "Lecturer", FormMethod.Post))
                 {
 
-                    <input type="submit" value="Exams Schedule" />
+                    <input type="submit" value="Show Students In Course" />
                     <br />
                     <br />
                     <br />
                     <br />
+                   
+                }
+                @using (Html.BeginForm("Show", "Lecturer", FormMethod.Post))
+                {
+
+                    <input type="submit" value="Show Student grades" />
                     <br />
                     <br />
                     <br />
+                    <br />
+                 
                 }
 
 

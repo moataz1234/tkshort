@@ -1,35 +1,54 @@
-﻿@model mvctk.Models.course
-@{
-    Layout = null;
-}
+﻿@model IEnumerable<mvctk.Models.course>
+
+@*@{
+        Layout = null;
+    }*@
 
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>ShowStudents</title>
+    <title>Schedule</title>
 </head>
 <body>
-    <div>
-        <div class="form-group">
-            @using (Html.BeginForm("StudentsTable", "Lecturer", FormMethod.Post,new { id = Model.ID }))
-            {
+    <table class="table">
 
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassRoom)
+            </th>
+            <th></th>
+        </tr>ml
 
+        @foreach (var item in Model)
+        {
+            @Html.HiddenFor(modelitem => item.ID)
+            <tr>
+                <td>
+                    <a href="/Lecturer/StudentsTable?courseID=@item.ID">@item.Name</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassRoom)
+                </td>
+            </tr>
+        }
 
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @{
-                        var courses = (List<SelectListItem>)TempData["courses"];
-                    }
-                    @Html.DropDownListFor(model => model.Name, courses, "Choose course", new { htmlAttributes = new { @class = "form-control"} })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                    @Html.
-                    <input type="submit" value="Exams Schedule" />
-                </div>
-                    }
-            </div>
-        </div>
-    </body>
+    </table>
+</body>
 </html>

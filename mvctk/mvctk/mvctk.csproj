@@ -192,6 +192,7 @@
     <Content Include="Views\Lecturer\ShowStudents.cshtml" />
     <Content Include="Views\Lecturer\StudentsTable.cshtml" />
     <Content Include="Views\grade\AddCourseToStudent.cshtml" />
+    <Content Include="Views\Lecturer\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

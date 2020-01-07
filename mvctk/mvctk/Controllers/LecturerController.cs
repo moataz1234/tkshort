@@ -43,23 +43,37 @@ namespace mvctk.Controllers
             return View(Lecturer_courses);
 
         }
+
         public ActionResult ShowStudents()
         {
-            var lecid = Session["user"].ToString();
-            TempData["Courses"] = DB.courses.Where(x => x.LecturerID.Equals(lecid)).Select(x => new SelectListItem
-            {
-                Text = x.Name,
-                Value = x.ID
-            }).ToList();
+            List<course> lecCourses = new List<course>();
+            foreach (course c in DB.courses)
+                if (c.LecturerID.Equals(Session["user"]))
+                    lecCourses.Add(c);
 
-            return View();
+            return View(lecCourses);
         }
+
         
-        public ActionResult StudentsTable(string id)
+        public ActionResult StudentsTable(string courseID)
         {
+            List<string> studentsid = new List<string>();
+            List<user> students = new List<user>();
+
+            foreach (grade g in DB.grades)
+                if (g.CourseID.Equals(courseID))
+                    studentsid.Add(g.StudentID);
 
 
-            return View();
+            foreach (String s in studentsid)
+                students.Add(DB.users.Find(s));
+
+            return View(students);
+        }
+
+        public ActionResult Show()
+        {
+           return RedirectToAction("show","grade");
         }
 
 

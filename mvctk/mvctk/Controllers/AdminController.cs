@@ -20,10 +20,10 @@ namespace mvctk.Controllers
             DB = new SQLContext();
         }
 
-      /*  public ActionResult Admin(user user)
+        public ActionResult Admin(user user)
         {
             return View();
-        }*/
+        }
 
         public ActionResult AddCourse()
         {
