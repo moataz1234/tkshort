@@ -20,13 +20,14 @@ namespace mvctk.Controllers
             DB = new SQLContext();
         }
 
-        public ActionResult Admin(user user)
+      /*  public ActionResult Admin(user user)
         {
             return View();
-        }
+        }*/
 
         public ActionResult AddCourse()
         {
+          //  Session["lecturers"] = DB.users;
             return View();
         }
 
@@ -141,67 +142,6 @@ namespace mvctk.Controllers
             return View(course);
 
         }
-        //========================================================================================//
-        public ActionResult index2()
-        {
-            return View(DB.grades);
-        }
-
-        public ActionResult update(string idstudent)
-        {
-            if (idstudent == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            grade grade = DB.grades.Find(idstudent);
-
-            if (grade == null)
-
-            {
-
-                return HttpNotFound();
-
-            }
-
-            return View(grade);
-
-        }
-
-        [HttpPost]
-        public ActionResult update(grade grade)
-        {
-            if (ModelState.IsValid)
-            {
-                DB.Entry(grade).State = EntityState.Modified;
-
-                DB.SaveChanges();
-
-                return RedirectToAction("update");
-            }
-            return View(grade);
-
-        }
-        [HttpPost]
-        public ActionResult submitgrade(grade model)
-        {
-            if (ModelState.IsValid)
-
-            {
-
-                DB.grades.Add(model);
-
-                DB.SaveChanges();
-
-                return RedirectToAction("update");
-
-            }
-
-            List<Object> list = new List<Object>();
-
-
-
-            return View(model);
-        }
+       
     }
 }

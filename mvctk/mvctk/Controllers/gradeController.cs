@@ -37,6 +37,9 @@ namespace mvctk.Controllers
             }
             return View(grade);
         }
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(grade grade)
@@ -49,7 +52,6 @@ namespace mvctk.Controllers
                 grad.GradeA = grade.GradeA;
                 grad.GradeB = grade.GradeB;
                 grad.StudentID = grade.StudentID;
-               // DB.Entry(grade).State = EntityState.Modified;
                 DB.SaveChanges();
                 return RedirectToAction("show");
             }
@@ -67,6 +69,29 @@ namespace mvctk.Controllers
                 DB.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult AddCourseToStudent()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Submit(grade model)
+        {
+
+            if (ModelState.IsValid)
+
+            {
+
+                DB.grades.Add(model);
+
+                DB.SaveChanges();
+
+                return RedirectToAction("AddCourseToStudent");
+
+            }
+
+            return View(model);
         }
     }
 }
