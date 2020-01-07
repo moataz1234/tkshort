@@ -1,8 +1,5 @@
 ﻿using mvctk.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace mvctk.Controllers
@@ -11,7 +8,8 @@ namespace mvctk.Controllers
     {
         private SQLContext DB = null;
 
-        public LoginController() {
+        public LoginController()
+        {
 
             DB = new SQLContext();
         }
@@ -26,8 +24,8 @@ namespace mvctk.Controllers
             if (ModelState.IsValid)
             {
                 var Logged = DB.users.FirstOrDefault(x => x.ID.Equals(user.ID));
-            if (Logged != null)
-            {
+                if (Logged != null)
+                {
                     if (Logged.PassWord.Equals(user.PassWord))
                     {
 
@@ -44,13 +42,13 @@ namespace mvctk.Controllers
                     else
                         ModelState.AddModelError("FirstName", "The username or password is incorrect");
                 }
-            else
+                else
                     ModelState.AddModelError("FirstName", "The username or password is incorrect");
             }
             return View("signin", user);
-            
+
         }
-        
-      
+
+
     }
 }

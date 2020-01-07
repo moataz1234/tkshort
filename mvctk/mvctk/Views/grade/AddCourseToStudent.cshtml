@@ -1,0 +1,41 @@
+﻿@model mvctk.Models.grade
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddCourse</title>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Submit", "grade", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td> Course ID: </td>
+                    <td>@Html.TextBoxFor(m => m.CourseID) @Html.ValidationMessageFor(model => model.CourseID)</td>
+                </tr>
+                <tr>
+                    <td> Student ID: </td>
+                    <td>@Html.TextBoxFor(m => m.StudentID) @Html.ValidationMessageFor(model => model.StudentID)</td>
+                </tr>
+                <tr>
+                    <td> <input id="Submit" type="submit" value="Add Course" /></td>
+                </tr>
+            </table>
+            <br />
+            <br />
+            @Html.ValidationMessageFor(model => model.StudentID)
+            <br />
+            <br />
+        }
+    </div>
+</body>
+</html>

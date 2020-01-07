@@ -1,10 +1,8 @@
 ﻿using mvctk.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace mvctk.Controllers
@@ -23,9 +21,9 @@ namespace mvctk.Controllers
             return View(DB.grades);
         }
 
-        public ActionResult Edit(string id1,string id2)
+        public ActionResult Edit(string id1, string id2)
         {
-            
+
             if (string.IsNullOrEmpty(id1) || string.IsNullOrEmpty(id2))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -47,7 +45,7 @@ namespace mvctk.Controllers
 
             try
             {
-                var grad = DB.grades.First(s => s.CourseID.Equals(grade.CourseID) && s.StudentID.Equals(grade.StudentID));
+                var grad = DB.grades.FirstOrDefault(s => s.CourseID.Equals(grade.CourseID) && s.StudentID.Equals(grade.StudentID));
                 grad.CourseID = grade.CourseID;
                 grad.GradeA = grade.GradeA;
                 grad.GradeB = grade.GradeB;
@@ -55,21 +53,21 @@ namespace mvctk.Controllers
                 DB.SaveChanges();
                 return RedirectToAction("show");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
-            
+
             return View(grade);
         }
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                DB.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        /*        protected override void Dispose(bool disposing)
+                {
+                    if (disposing)
+                    {
+                        DB.Dispose();
+                    }
+                    base.Dispose(disposing);
+                }*/
 
         public ActionResult AddCourseToStudent()
         {
@@ -79,19 +77,58 @@ namespace mvctk.Controllers
         public ActionResult Submit(grade model)
         {
 
+
             if (ModelState.IsValid)
-
             {
+                course temp1 = null;
+                course temp2 = null;
 
-                DB.grades.Add(model);
+                int flag = 0;
+                List<course> courss = new List<course>();
+                List<string> user_courses = new List<string>();
+                string studentid = model.StudentID;
+                string courseid = model.CourseID;
 
-                DB.SaveChanges();
+                foreach (grade g in DB.grades)
+                    if (g.StudentID.Equals(studentid))
+                        user_courses.Add(g.CourseID);
+                foreach (string s in user_courses) {
+                    temp1 = DB.courses.Find(s);
+                    temp2 = DB.courses.Find(courseid);
 
-                return RedirectToAction("AddCourseToStudent");
+                    if (temp1.Day.Equals(temp2.Day) && temp1.Time.Equals(temp2.Time))
+                    {
+                        flag = 1;
+                    }
+                }
 
+                var crs = DB.courses.FirstOrDefault(s => s.ID.Equals(model.CourseID));
+                var std = DB.users.FirstOrDefault(s => s.ID.Equals(model.StudentID));
+                var grad = DB.grades.FirstOrDefault(s => s.CourseID.Equals(model.CourseID) && s.StudentID.Equals(model.StudentID));
+
+                if (crs != null && std != null && grad == null && flag==0)
+                {
+                    if (std.UserTyper == 0)
+                    {
+                        DB.grades.Add(model);
+                        DB.SaveChanges();
+                        return RedirectToAction("AddCourseToStudent");
+                    }
+                    else
+                        ModelState.AddModelError("StudentID", "studentid is incorrect");
+
+
+                }
+                else
+                {
+                    ModelState.AddModelError("StudentID", "The student id is incorrect");
+                    ModelState.AddModelError("CourseID", "The course id  is incorrect");
+
+                }
             }
-
-            return View(model);
+            else
+                ModelState.AddModelError("StudentID", "The course id or student id is incorrect");
+            return View("AddCourseToStudent", model);
         }
     }
 }
