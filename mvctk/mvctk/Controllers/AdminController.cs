@@ -22,7 +22,8 @@ namespace mvctk.Controllers
 
         public ActionResult Admin(user user)
         {
-            return View();
+            Session["user"] = user.ID;
+            return View(user);
         }
 
         public ActionResult AddCourse()
