@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<mvctk.Models.course>
 
-@{
-    Layout = null;
-}
 
 <!DOCTYPE html>
 
@@ -81,9 +78,12 @@
             </td>
             <td>
 
-             @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Edit Time Schedule", "Edit", new { id = item.ID }) |
 
-             @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("Edit Exam Schedule", "EditExam", new { id = item.ID }) |
+
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
 
             </td>
         </tr>

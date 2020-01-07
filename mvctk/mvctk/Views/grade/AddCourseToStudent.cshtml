@@ -14,20 +14,22 @@
     <div>
         @using (Html.BeginForm("Submit", "grade", FormMethod.Post))
         {
-            <table>
-                <br/>
-                <tr>
-                    <td> Course ID: </td>
-                    <td>@Html.TextBoxFor(m => m.CourseID) @Html.ValidationMessageFor(model => model.CourseID)</td>
-                </tr>
-                <tr>
-                    <td> Student ID: </td>
-                    <td>@Html.TextBoxFor(m => m.StudentID) @Html.ValidationMessageFor(model => model.StudentID)</td>
-                </tr>
-                <tr>
-                    <td> <input id="Submit" type="submit" value="Add Course" /></td>
-                </tr>
-            </table>
+        <table>
+            <br />
+            <tr>
+                <td> Course ID: </td>
+                <td>@Html.TextBoxFor(m => m.CourseID) @Html.ValidationMessageFor(model => model.CourseID)</td>
+            </tr>
+            <br/>
+            <tr>
+                <td> Student ID: </td>
+                <td>@Html.TextBoxFor(m => m.StudentID) @Html.ValidationMessageFor(model => model.StudentID)</td>
+            </tr>
+        
+            <tr>
+                <td> <input id="Submit" type="submit" value="Add Course" /></td>
+            </tr>
+        </table>
             <br />
             <br />
             @Html.ValidationMessageFor(model => model.CourseID)

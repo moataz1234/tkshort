@@ -1,0 +1,44 @@
+﻿@model mvctk.Models.course
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddCourse</title>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
+        {
+        <table>
+            @Html.HiddenFor(m => m.ID)
+            @Html.HiddenFor(m => m.Name)
+            @Html.HiddenFor(m => m.LecturerID)
+            @Html.HiddenFor(m => m.ClassRoom)
+            @Html.HiddenFor(m => m.Points)
+            @Html.HiddenFor(m => m.Day)
+            @Html.HiddenFor(m => m.Time)
+            <tr>
+                <td> Date Exam Moed A: </td>
+                <td>@Html.TextBoxFor(m => m.ExamA) @Html.ValidationMessageFor(model => model.ExamA)</td>
+            </tr>
+            <tr>
+                <td> Date Exam Moed B: </td>
+                <td>@Html.TextBoxFor(m => m.ExamB)@Html.ValidationMessageFor(model => model.ExamB) </td>
+            </tr>
+
+            <tr>
+                <td> <input id="Submit" type="submit" value="Edit Course" /></td>
+            </tr>
+        </table>
+        }
+    </div>
+</body>
+</html>
