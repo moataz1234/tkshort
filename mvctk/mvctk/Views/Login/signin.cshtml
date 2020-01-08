@@ -10,10 +10,10 @@
 <head>
     <style>
         div {
-            border-bottom:solid;
-            border-bottom-color:black;
-
+            border-bottom: solid;
+            border-bottom-color: black;
         }
+
         input[type=submit] {
             background-color: #4CAF50; /* Green */
             border: none;
@@ -25,13 +25,10 @@
             font-size: 16px;
             margin: 4px 2px;
             cursor: pointer;
-            -webkit-transition-duration: 0.4s; 
+            -webkit-transition-duration: 0.4s;
             transition-duration: 0.4s;
             box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
         }
-        
-        
-      
     </style>
     <meta name="viewport" content="width=device-width" />
     <title>Enter</title>
@@ -41,49 +38,49 @@
 </head>
 <body>
     <center>
-                <div>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                </div>
-            
-                <div style="background-color:lightgreen">
+        <div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <div style="background-color:lightgreen">
 
 
+            <br />
+            <br />
+            <br />
+            @using (Html.BeginForm("Submit", "Login", FormMethod.Post))
+            {
+
+                <i><font size="6">User Name:</font></i> @Html.TextBoxFor(Model => Model.ID)<br/><br /> <font size="4" color="red"> @Html.ValidationMessageFor(model => model.ID) </font>
+
+
+                <br />
+                <br />
+                <br />
+                <i><font size="6">Password :</font></i> @Html.TextBoxFor(Model => Model.PassWord)<font size="4" color="red"><br /><br /> @Html.ValidationMessageFor(model => model.PassWord)</font>
+                <br />
+                <br />
+                <br />
+
+                <input id="Submit1" type="submit" value="LogIn" />
+                <br />
+                
+                <font size="4" color="red">
+                    <br /> @Html.ValidationMessageFor(model => model.FirstName)</font>
                     <br />
                     <br />
                     <br />
-                    @using (Html.BeginForm("Submit", "Login", FormMethod.Post))
-                    {
-
-                        <i><font size="6">User Name:</font></i> @Html.TextBoxFor(Model => Model.ID) @Html.ValidationMessageFor(model => model.ID)
-
-
-                        <br />
-                        <br />
-                        <br />
-                        <i><font size="6">Password :</font></i> @Html.TextBoxFor(Model => Model.PassWord) @Html.ValidationMessageFor(model => model.PassWord)
-                        <br />
-                        <br />
-                        <br />
-
-                        <input id="Submit1" type="submit" value="LogIn" />
-                        <br />
-                        <br />
-                        <br />
-                        @Html.ValidationMessageFor(model => model.FirstName)
-                        <br />
-                        <br />
-                        <br />
 
                     }
 
-    </center>
-             </div>
+</center>
+    </div>
 
-    
-   
-    
+
+
+
 </body>
 </html>
