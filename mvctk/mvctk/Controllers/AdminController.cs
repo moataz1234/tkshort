@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 namespace mvctk.Controllers
@@ -31,20 +32,36 @@ namespace mvctk.Controllers
         [HttpPost]
         public ActionResult Submit(course model)
         {
-
             if (ModelState.IsValid)
-
             {
+                if (model != null)
+                {
 
-                DB.courses.Add(model);
+                    int flag = 0;
+                    var cors = DB.courses.FirstOrDefault(s => s.ID.Equals(model.ID));
+                    foreach (user u in DB.users)
+                        if (model.LecturerID.Equals(u.ID) && u.UserTyper == 1)
+                            flag = 1;
+                    if (cors == null)
+                    {
+                        if (flag == 1)
+                        {
+                            DB.courses.Add(model);
 
-                DB.SaveChanges();
+                            DB.SaveChanges();
 
-                return RedirectToAction("Index");
+                            return RedirectToAction("Index");
+                        }
+                        else
+                            ModelState.AddModelError("LecturerID", "The Lecturer does not exsit!");
+                    }
+                    else
+                        ModelState.AddModelError("ID", "The Course Already exsit!");
 
+                }
             }
 
-            return View(model);
+            return View("AddCourse", model);
         }
 
         public ActionResult Index()

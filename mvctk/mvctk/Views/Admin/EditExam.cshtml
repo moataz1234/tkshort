@@ -25,13 +25,14 @@
             @Html.HiddenFor(m => m.Points)
             @Html.HiddenFor(m => m.Day)
             @Html.HiddenFor(m => m.Time)
+
             <tr>
                 <td> Date Exam Moed A: </td>
-                <td>@Html.TextBoxFor(m => m.ExamA) @Html.ValidationMessageFor(model => model.ExamA)</td>
+                <td>@Html.TextBoxFor(m => m.ExamA) @Html.ValidationMessageFor(model => model.ExamA, "{0:dd/MM/yyyy}")</td>
             </tr>
             <tr>
                 <td> Date Exam Moed B: </td>
-                <td>@Html.TextBoxFor(m => m.ExamB)@Html.ValidationMessageFor(model => model.ExamB) </td>
+                <td>@Html.TextBoxFor(m => m.ExamB) @Html.ValidationMessageFor(model => model.ExamB, "{0:dd/MM/yyyy}") </td>
             </tr>
 
             <tr>
