@@ -161,7 +161,7 @@ namespace mvctk.Controllers
                 foreach (string s in courses)
                     foreach (course c in DB.courses)
                         if (s.Equals(c.ID))
-                            if (c.Time.Equals(course.Time) && c.Day.Equals(course.Day))
+                            if (c.startlec.Equals(course.startlec) && c.Day.Equals(course.Day))
                                 flag = 1;
 
 

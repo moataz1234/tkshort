@@ -41,12 +41,16 @@
                 <td>@Html.TextBoxFor(m => m.LecturerID) @Html.ValidationMessageFor(model => model.LecturerID)</td>
             </tr>
             <tr>
-                <td> Time: </td>
-                <td>@Html.TextBoxFor(m => m.Time) @Html.ValidationMessageFor(model => model.Time)</td>
+                <td> Start Lecture: </td>
+                <td>@Html.TextBoxFor(m => m.startlec) @Html.ValidationMessageFor(model => model.startlec)</td>
+            </tr>
+            <tr>
+                <td> End Lecture: </td>
+                <td>@Html.TextBoxFor(m => m.endlec) @Html.ValidationMessageFor(model => model.startlec)</td>
             </tr>
             <tr>
                 <td> Day: </td>
-                <td>@Html.TextBoxFor(m => m.Day)@Html.ValidationMessageFor(model => model.Day) </td>
+                <td>@Html.TextBoxFor(m => m.Day) @Html.ValidationMessageFor(model => model.Day) </td>
             </tr>
             <tr>
                 <td> Class Room: </td>

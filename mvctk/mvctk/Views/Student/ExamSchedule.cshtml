@@ -21,16 +21,22 @@
                 @Html.DisplayNameFor(model => model.ExamA)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Time)
+                @Html.DisplayNameFor(model => model.startlec)
             </th>
             <th>
-               Class Room For Exam A
+                @Html.DisplayNameFor(model => model.endlec)
+            </th>
+            <th>
+                Class Room For Exam A
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ExamB)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Time)
+                @Html.DisplayNameFor(model => model.startlec)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endlec)
             </th>
             <th>
                 Class Room For Exam B
@@ -48,7 +54,10 @@
                 @Html.DisplayFor(modelItem => item.ExamA)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Time)
+                @Html.DisplayFor(modelItem => item.startlec)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endlec)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ClassRoom)
@@ -57,7 +66,10 @@
                 @Html.DisplayFor(modelItem => item.ExamB)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Time)
+                @Html.DisplayFor(modelItem => item.startlec)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endlec)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ClassRoom)

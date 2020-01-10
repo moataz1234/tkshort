@@ -21,7 +21,10 @@
                 @Html.DisplayNameFor(model => model.Day)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Time)
+                @Html.DisplayNameFor(model => model.startlec)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endlec)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ClassRoom)
@@ -31,20 +34,23 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelutem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Day)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Time)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClassRoom)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelutem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.startlec)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endlec)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassRoom)
+            </td>
+        </tr>
         }
 
     </table>

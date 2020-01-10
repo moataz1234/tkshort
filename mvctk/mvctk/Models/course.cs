@@ -22,12 +22,12 @@ namespace mvctk.Models
         public int? Points { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string ExamA { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime ExamA { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string ExamB { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime ExamB { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -35,7 +35,11 @@ namespace mvctk.Models
 
         [Required]
         [StringLength(50)]
-        public string Time { get; set; }
+        public string startlec { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string endlec { get; set; }
 
         [Required]
         [StringLength(50)]

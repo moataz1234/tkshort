@@ -42,22 +42,39 @@ namespace mvctk.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(grade grade)
         {
+            var crs = DB.courses.FirstOrDefault(s => s.ID.Equals(grade.CourseID));
+            DateTime datenow = DateTime.Now;
+            DateTime ExamA = crs.ExamA;
+            DateTime ExamB = crs.ExamB;
 
-            try
+            int valueA = DateTime.Compare(ExamA, datenow);
+            int valueB = DateTime.Compare(ExamB, datenow);
+
+            // checking 
+            if (valueA < 0)
             {
-                var grad = DB.grades.FirstOrDefault(s => s.CourseID.Equals(grade.CourseID) && s.StudentID.Equals(grade.StudentID));
-                grad.CourseID = grade.CourseID;
-                grad.GradeA = grade.GradeA;
-                grad.GradeB = grade.GradeB;
-                grad.StudentID = grade.StudentID;
-                DB.SaveChanges();
-                return RedirectToAction("show");
+                ModelState.AddModelError("GradeA", "You can't update the grade becuase the date ExamA later than Now");
             }
-            catch (Exception ex)
+            if (valueB < 0)
             {
-
+                ModelState.AddModelError("GradeB", "You can't update the grade becuase the date ExamB later than Now");
             }
-
+            else if (valueA > 0 || valueB>0 )
+            {
+                try
+                {
+                    var grad = DB.grades.FirstOrDefault(s => s.CourseID.Equals(grade.CourseID) && s.StudentID.Equals(grade.StudentID));
+                    grad.CourseID = grade.CourseID;
+                    grad.GradeA = grade.GradeA;
+                    grad.GradeB = grade.GradeB;
+                    grad.StudentID = grade.StudentID;
+                    DB.SaveChanges();
+                    return RedirectToAction("show");
+                }
+                catch (Exception ex)
+                {
+                }
+            }
             return View(grade);
         }
         /*        protected override void Dispose(bool disposing)
@@ -102,7 +119,6 @@ namespace mvctk.Controllers
                         flag = 1;
                     }
                 }
-
                 var crs = DB.courses.FirstOrDefault(s => s.ID.Equals(model.CourseID));
                 var std = DB.users.FirstOrDefault(s => s.ID.Equals(model.StudentID));
                 var grad = DB.grades.FirstOrDefault(s => s.CourseID.Equals(model.CourseID) && s.StudentID.Equals(model.StudentID));
@@ -113,6 +129,7 @@ namespace mvctk.Controllers
                     {
                         if (flag == 0)
                         {
+                         
                             if (std.UserTyper == 0)
                             {
                                 DB.grades.Add(model);
