@@ -53,11 +53,11 @@ namespace mvctk.Controllers
             // checking 
             if (valueA < 0)
             {
-                ModelState.AddModelError("GradeA", "You can't update the grade becuase the date ExamA later than Now");
+                ModelState.AddModelError("GradeA", "you can update the grade of moed A after the date of the exam");
             }
             if (valueB < 0)
             {
-                ModelState.AddModelError("GradeB", "You can't update the grade becuase the date ExamB later than Now");
+                ModelState.AddModelError("GradeB", "you can update the grade of moed B after the date of the exam");
             }
             else if (valueA > 0 || valueB>0 )
             {
@@ -114,7 +114,7 @@ namespace mvctk.Controllers
                     temp1 = DB.courses.Find(s);
                     temp2 = DB.courses.Find(courseid);
 
-                    if (temp1.Day.Equals(temp2.Day) && temp1.Time.Equals(temp2.Time) && temp1 != temp2)
+                    if (temp1.Day.Equals(temp2.Day) && temp1.startlec.Equals(temp2.startlec) && temp1 != temp2)
                     {
                         flag = 1;
                     }

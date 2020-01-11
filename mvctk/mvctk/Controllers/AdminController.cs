@@ -141,8 +141,9 @@ namespace mvctk.Controllers
         {
             if (ModelState.IsValid)
             {
-                course temp2 = null;
                 int flag = 0;
+
+                course temp2 = null;
 
 
                 List<string> user_courses = new List<string>();
@@ -150,19 +151,26 @@ namespace mvctk.Controllers
                 foreach (grade g in DB.grades)
                     if (g.CourseID.Equals(course.ID))
                         user_courses.Add(g.StudentID);
-                foreach (string s in user_courses)
 
+                foreach (string s in user_courses)
                     foreach (grade g in DB.grades)
                         if (g.StudentID.Equals(s))
                             if (!g.CourseID.Equals(course.ID))
                                 courses.Add(g.CourseID);
 
-
+                int start, end, cstart, cend;
+                cstart = Int32.Parse(course.startlec.Substring(0, 2));
+                cend = Int32.Parse(course.endlec.Substring(0, 2));
                 foreach (string s in courses)
                     foreach (course c in DB.courses)
                         if (s.Equals(c.ID))
-                            if (c.startlec.Equals(course.startlec) && c.Day.Equals(course.Day))
-                                flag = 1;
+                            if (c.Day.Equals(course.Day))
+                            {
+                                start = Int32.Parse(c.startlec.Substring(0, 2));
+                                end = Int32.Parse(c.endlec.Substring(0, 2));
+                                if (c.startlec.Equals(course.startlec) || (start > cend) || end > cstart)
+                                    flag = 1;
+                            }
 
 
 
@@ -202,7 +210,7 @@ namespace mvctk.Controllers
 
             }
 
-            return View(course);
+            return View("EditExam", course);
 
         }
 
@@ -210,17 +218,56 @@ namespace mvctk.Controllers
         public ActionResult EditExam(course course)
         {
             if (ModelState.IsValid)
-
             {
+                //======first check==========
+                DateTime ExamA = course.ExamA;
+                DateTime ExamB = course.ExamB;
+                int value = DateTime.Compare(ExamA, ExamB);
+                //======second check=========
+                int flag = 0, fa = 0, fb = 0;
+                var lec = DB.users.FirstOrDefault(s => s.ID.Equals(course.LecturerID));
+                List<DateTime> exama = new List<DateTime>();
+                List<DateTime> examb = new List<DateTime>();
 
-                DB.Entry(course).State = EntityState.Modified;
+                foreach (course c in DB.courses)
+                    if (c.LecturerID.Equals(course.LecturerID))
+                    {
+                        exama.Add(c.ExamA);
+                        examb.Add(c.ExamB);
+                    }
+                foreach (DateTime a in exama)
+                    foreach (DateTime b in examb)
+                    {
+                        if (a == course.ExamA)
+                            fa = 1;
+                        if (b == course.ExamB)
+                            fb = 1;
+                    }
+                /*
+                if (course.ExamB == course.ExamA)
+                    flag = 1;*/
+                if (fa == 0)
+                {
+                    if (fb == 0)
+                    {
 
-                DB.SaveChanges();
+                        if (value < 0)
+                        {
+                            DB.Entry(course).State = EntityState.Modified;
+                            DB.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        else
+                            ModelState.AddModelError("ExamA", "Moed A must be earlier than Moed B");
+                    }
+                    else
+                        ModelState.AddModelError("ExamB", "the lecturer have an onther exam in this date");
+                }
+                else
+                    ModelState.AddModelError("ExamA", "the lecturer have an onther exam in this date");
 
-                return RedirectToAction("Index");
 
             }
-
             return View(course);
 
         }

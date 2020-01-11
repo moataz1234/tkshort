@@ -35,6 +35,7 @@ namespace mvctk.Models
 
         [Required]
         [StringLength(50)]
+        [RegularExpression(@"^(?:[01][0-9]|2[0-3]):[0-5][0-9]$",ErrorMessage ="you must enter a time like hh:mm")]
         public string startlec { get; set; }
 
         [Required]

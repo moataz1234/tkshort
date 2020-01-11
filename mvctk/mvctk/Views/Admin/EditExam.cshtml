@@ -15,7 +15,7 @@
 </head>
 <body>
     <div>
-        @using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
+        @using (Html.BeginForm("EditExam", "Admin", FormMethod.Post))
         {
         <table>
             @Html.HiddenFor(m => m.ID)
@@ -29,11 +29,11 @@
 
             <tr>
                 <td> Date Exam Moed A: </td>
-                <td>@Html.TextBoxFor(m => m.ExamA) @Html.ValidationMessageFor(model => model.ExamA, "{0:dd/MM/yyyy}")</td>
+                <td>@Html.TextBoxFor(m => m.ExamA) @Html.ValidationMessageFor(model => model.ExamA)</td>
             </tr>
             <tr>
                 <td> Date Exam Moed B: </td>
-                <td>@Html.TextBoxFor(m => m.ExamB) @Html.ValidationMessageFor(model => model.ExamB, "{0:dd/MM/yyyy}") </td>
+                <td>@Html.TextBoxFor(m => m.ExamB) @Html.ValidationMessageFor(model => model.ExamB) </td>
             </tr>
 
             <tr>
