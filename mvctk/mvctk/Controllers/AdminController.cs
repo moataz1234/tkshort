@@ -148,6 +148,7 @@ namespace mvctk.Controllers
 
                 List<string> user_courses = new List<string>();
                 List<string> courses = new List<string>();
+                List<string> LecIds = new List<string>();
                 foreach (grade g in DB.grades)
                     if (g.CourseID.Equals(course.ID))
                         user_courses.Add(g.StudentID);
@@ -176,13 +177,28 @@ namespace mvctk.Controllers
 
                 if (course != null && flag == 0)
                 {
+                    foreach (course c in DB.courses)
+                        if (course.LecturerID.Equals(c.LecturerID))
+                            if (!course.ID.Equals(c.ID))
+                                if (c.Day.Equals(course.Day))
+                                {
+                                    start = Int32.Parse(c.startlec.Substring(0, 2));
+                                    end = Int32.Parse(c.endlec.Substring(0, 2));
+                                    if (c.startlec.Equals(course.startlec) || (start > cend) || end > cstart)
+                                        flag = 1;
+                                }
+                    if (flag == 0)
+                    {
 
-                    DB.Entry(course).State = EntityState.Modified;
-                    DB.SaveChanges();
-                    return RedirectToAction("Index");
+                        DB.Entry(course).State = EntityState.Modified;
+                        DB.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    else
+                        ModelState.AddModelError("endlec", "There are conflict with lecturer's onther course at the same time");
                 }
                 else
-                    ModelState.AddModelError("Time", "There are conflict with onther course at the same time");
+                    ModelState.AddModelError("endlec", "There are conflict with student's onther course at the same time");
 
             }
             return View(course);
