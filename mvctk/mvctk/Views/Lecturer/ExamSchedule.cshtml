@@ -18,25 +18,25 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ExamA)
+                @Html.DisplayName("Date Moed A")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.startlec)
+                @Html.DisplayName("Start Lecture")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.endlec)
+                @Html.DisplayName("End Lecture")
             </th>
             <th>
                 Class Room For Exam A
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ExamB)
+                @Html.DisplayName("Date Moed B")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.startlec)
+                @Html.DisplayName("Start Lecture")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.endlec)
+                @Html.DisplayName("End Lecture")
             </th>
             <th>
                 Class Room For Exam B
@@ -46,35 +46,35 @@
 
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelutem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExamA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.startlec)
-            </td>
-            <th>
-                @Html.DisplayNameFor(model => model.endlec)
-            </th>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClassRoom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExamB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.startlec)
-            </td>
-            <th>
-                @Html.DisplayNameFor(model => model.endlec)
-            </th>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClassRoom)
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelutem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExamA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.startlec)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endlec)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassRoom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExamB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.startlec)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endlec)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassRoom)
+                </td>
+            </tr>
         }
 
     </table>

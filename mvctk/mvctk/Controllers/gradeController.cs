@@ -42,38 +42,52 @@ namespace mvctk.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(grade grade)
         {
-            var crs = DB.courses.FirstOrDefault(s => s.ID.Equals(grade.CourseID));
-            DateTime datenow = DateTime.Now;
-            DateTime ExamA = crs.ExamA;
-            DateTime ExamB = crs.ExamB;
+            if (ModelState.IsValid)
+            {
 
-            int valueA = DateTime.Compare(ExamA, datenow);
-            int valueB = DateTime.Compare(ExamB, datenow);
+                var crs = DB.courses.FirstOrDefault(s => s.ID.Equals(grade.CourseID));
+                DateTime datenow = DateTime.Now;
+                DateTime ExamA = crs.ExamA;
+                DateTime ExamB = crs.ExamB;
 
-            // checking 
-            if (valueA < 0)
-            {
-                ModelState.AddModelError("GradeA", "you can update the grade of moed A after the date of the exam");
-            }
-            if (valueB < 0)
-            {
-                ModelState.AddModelError("GradeB", "you can update the grade of moed B after the date of the exam");
-            }
-            else if (valueA > 0 || valueB>0 )
-            {
-                try
+                int valueA = DateTime.Compare(ExamA, datenow);
+                int valueB = DateTime.Compare(ExamB, datenow);
+
+                // checking 
+                /* if (valueA < 0)
+                 {
+                     ModelState.AddModelError("GradeA", "you can update the grade of moed A after the date of the exam");
+                 }
+                 if (valueB < 0)
+                 {
+                     ModelState.AddModelError("GradeB", "you can update the grade of moed B after the date of the exam");
+                 }*/
+                if (valueA < 0 || grade.GradeA == null)
                 {
-                    var grad = DB.grades.FirstOrDefault(s => s.CourseID.Equals(grade.CourseID) && s.StudentID.Equals(grade.StudentID));
-                    grad.CourseID = grade.CourseID;
-                    grad.GradeA = grade.GradeA;
-                    grad.GradeB = grade.GradeB;
-                    grad.StudentID = grade.StudentID;
-                    DB.SaveChanges();
-                    return RedirectToAction("show");
+                    if (valueB < 0 || grade.GradeB == null)
+                    {
+
+                        try
+                        {
+                            var grad = DB.grades.FirstOrDefault(s => s.CourseID.Equals(grade.CourseID) && s.StudentID.Equals(grade.StudentID));
+                            grad.CourseID = grade.CourseID;
+                            grad.GradeA = grade.GradeA;
+                            grad.GradeB = grade.GradeB;
+                            grad.StudentID = grade.StudentID;
+                            DB.SaveChanges();
+                            return RedirectToAction("show");
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                    }
+                    else
+                        ModelState.AddModelError("GradeB", "you can update the grade of moed B after the date of the exam");
+
                 }
-                catch (Exception ex)
-                {
-                }
+                else
+                    ModelState.AddModelError("GradeA", "you can update the grade of moed A after the date of the exam");
+
             }
             return View(grade);
         }
@@ -113,10 +127,12 @@ namespace mvctk.Controllers
                 {
                     temp1 = DB.courses.Find(s);
                     temp2 = DB.courses.Find(courseid);
-
-                    if (temp1.Day.Equals(temp2.Day) && temp1.startlec.Equals(temp2.startlec) && temp1 != temp2)
+                    if (temp1 != null && temp2 != null)
                     {
-                        flag = 1;
+                        if (temp1.Day.Equals(temp2.Day) && temp1.startlec.Equals(temp2.startlec) && temp1 != temp2)
+                        {
+                            flag = 1;
+                        }
                     }
                 }
                 var crs = DB.courses.FirstOrDefault(s => s.ID.Equals(model.CourseID));
@@ -129,7 +145,7 @@ namespace mvctk.Controllers
                     {
                         if (flag == 0)
                         {
-                         
+
                             if (std.UserTyper == 0)
                             {
                                 DB.grades.Add(model);
