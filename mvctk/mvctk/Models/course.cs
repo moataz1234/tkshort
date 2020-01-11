@@ -21,11 +21,11 @@ namespace mvctk.Models
         [Required]
         public int? Points { get; set; }
 
-        [Required]
+
         [Column(TypeName = "date")]
         public DateTime ExamA { get; set; }
 
-        [Required]
+        
         [Column(TypeName = "date")]
         public DateTime ExamB { get; set; }
 
