@@ -36,7 +36,7 @@ namespace mvctk.Controllers
                 if (course != null)
                 {
 
-                    int flag = 0;
+                    int flag = 0, classroomflag = 0;
                     var cors = DB.courses.FirstOrDefault(s => s.ID.Equals(course.ID));
                     //===================ckeck if this course conflict with other courses to the lecturer==========//
                     int start, end, cstart, cend;
@@ -46,6 +46,8 @@ namespace mvctk.Controllers
                     foreach (course c in DB.courses)
                         if (course.LecturerID.Equals(c.LecturerID))
                             if (!course.ID.Equals(c.ID))
+                            {
+
                                 if (c.Day.Equals(course.Day))
                                 {
                                     start = Int32.Parse(c.startlec.Substring(0, 2));
@@ -53,6 +55,9 @@ namespace mvctk.Controllers
                                     if (c.startlec.Equals(course.startlec) || (start >= cstart && start < cend) || (end > cstart && end <= cend))
                                         flag2 = 1;
                                 }
+                                if (course.ClassRoom.Equals(c.ClassRoom))
+                                    classroomflag = 1;
+                            }
                     //======first check==========
                     DateTime ExamA = course.ExamA;
                     DateTime ExamB = course.ExamB;
@@ -87,7 +92,7 @@ namespace mvctk.Controllers
                         if (fb == 0)
                         {
 
-                            if (value < 0)
+                            if (value > 0)
                             {
 
                                 if (cors == null)
@@ -96,12 +101,18 @@ namespace mvctk.Controllers
                                     {
                                         if (flag2 == 0)
                                         {
+                                            if (classroomflag == 0)
+                                            {
 
                                             DB.courses.Add(course);
 
                                             DB.SaveChanges();
 
                                             return RedirectToAction("Index");
+                                            }
+                                            else
+                                                ModelState.AddModelError("ClassRoom", "There are another lecture in this Class");
+
                                         }
                                         else
                                             ModelState.AddModelError("LecturerID", "The Lecturer have onther course in this time,Please change lecturer or time");
@@ -246,30 +257,36 @@ namespace mvctk.Controllers
                                     if (c.startlec.Equals(course.startlec) || (start >= cstart && start < cend) || (end > cstart && end <= cend))
                                         flag2 = 1;
                                 }
-                    if (flag1 == 0)
+                    if (cend > cstart)
                     {
-                        if (flag2 == 0)
-                        {
 
-                            var cors = DB.courses.FirstOrDefault(s => s.ID.Equals(course.ID));
-                            cors.ID = course.ID;
-                            cors.Name = course.Name;
-                            cors.Points = course.Points;
-                            cors.LecturerID = course.LecturerID;
-                            cors.ExamA = course.ExamA;
-                            cors.ExamB = course.ExamB;
-                            cors.startlec = course.startlec;
-                            cors.endlec = course.endlec;
-                            cors.Day = course.Day;
-                            cors.ClassRoom = course.ClassRoom;
-                            DB.SaveChanges();
-                            return RedirectToAction("Index");
+                        if (flag1 == 0)
+                        {
+                            if (flag2 == 0)
+                            {
+
+                                var cors = DB.courses.FirstOrDefault(s => s.ID.Equals(course.ID));
+                                cors.ID = course.ID;
+                                cors.Name = course.Name;
+                                cors.Points = course.Points;
+                                cors.LecturerID = course.LecturerID;
+                                cors.ExamA = course.ExamA;
+                                cors.ExamB = course.ExamB;
+                                cors.startlec = course.startlec;
+                                cors.endlec = course.endlec;
+                                cors.Day = course.Day;
+                                cors.ClassRoom = course.ClassRoom;
+                                DB.SaveChanges();
+                                return RedirectToAction("Index");
+                            }
+                            else
+                                ModelState.AddModelError("endlec", "There are conflict with lecturer's in onther course at the same time");
                         }
                         else
-                            ModelState.AddModelError("endlec", "There are conflict with lecturer's in onther course at the same time");
+                            ModelState.AddModelError("endlec", "There are conflict with student's in onther course at the same time");
                     }
                     else
-                        ModelState.AddModelError("endlec", "There are conflict with student's in onther course at the same time");
+                        ModelState.AddModelError("startlec", "the start lecture must be earlier than end lecture");
 
                 }
             }

@@ -21,11 +21,11 @@ namespace mvctk.Models
         [Required]
         public int? Points { get; set; }
 
-
+        [Required]
         [Column(TypeName = "date")]
         public DateTime ExamA { get; set; }
 
-        
+        [Required]
         [Column(TypeName = "date")]
         public DateTime ExamB { get; set; }
 
@@ -35,7 +35,7 @@ namespace mvctk.Models
 
         [Required]
         [StringLength(50)]
-        [RegularExpression(@"^(?:[01][0-9]|2[0-3]):[0-5][0-9]$",ErrorMessage ="you must enter a time like hh:mm")]
+        [RegularExpression(@"^(?:[01][0-9]|2[0-3]):[0][0]$",ErrorMessage ="you must enter a time like hh:00")]
         public string startlec { get; set; }
 
         [Required]
@@ -44,6 +44,7 @@ namespace mvctk.Models
 
         [Required]
         [StringLength(50)]
+        [RegularExpression(@"^sunday|monday|tuesday|wednesday|thursday|friday$",ErrorMessage ="Day=sunday-friday")]
         public string Day { get; set; }
 
         [Required]

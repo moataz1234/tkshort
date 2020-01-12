@@ -17,29 +17,41 @@
     <div>
         @using (Html.BeginForm("EditExam", "Admin", FormMethod.Post))
         {
-        <table>
-            @Html.HiddenFor(m => m.ID)
-            @Html.HiddenFor(m => m.Name)
-            @Html.HiddenFor(m => m.LecturerID)
-            @Html.HiddenFor(m => m.ClassRoom)
-            @Html.HiddenFor(m => m.Points)
-            @Html.HiddenFor(m => m.Day)
-            @Html.HiddenFor(m => m.startlec)
-            @Html.HiddenFor(m => m.endlec)
+            <table>
+                @Html.HiddenFor(m => m.ID)
+                @Html.HiddenFor(m => m.Name)
+                @Html.HiddenFor(m => m.LecturerID)
+                @Html.HiddenFor(m => m.ClassRoom)
+                @Html.HiddenFor(m => m.Points)
+                @Html.HiddenFor(m => m.Day)
+                @Html.HiddenFor(m => m.startlec)
+                @Html.HiddenFor(m => m.endlec)
 
-            <tr>
-                <td> Date Exam Moed A: </td>
-                <td>@Html.TextBoxFor(m => m.ExamA) @Html.ValidationMessageFor(model => model.ExamA)</td>
-            </tr>
-            <tr>
-                <td> Date Exam Moed B: </td>
-                <td>@Html.TextBoxFor(m => m.ExamB) @Html.ValidationMessageFor(model => model.ExamB) </td>
-            </tr>
+                <tr>
+                    <td> Date Exam Moed A: </td>
+                    <td>
+                        <input name="ExamA" type="date" value="@String.Format("{0:yyyy-MM-dd}",Model.ExamA)" />
+                        @Html.ValidationMessageFor(model => model.ExamA)
+                    </td>
+                </tr>
+                <tr>
+                    <td> Date Exam Moed B: </td>
+                    <td>
+                        <input name="ExamB" type="date" value="@String.Format("{0:yyyy-MM-dd}",Model.ExamB)" />
+                        @Html.ValidationMessageFor(model => model.ExamB)
+                    </td>
+                </tr>
 
-            <tr>
-                <td> <input id="Submit" type="submit" value="Edit Course" /></td>
-            </tr>
-        </table>
+                <tr>
+                    <td>
+                        <input id="Submit" type="submit" value="Edit Course" />
+                        <br />
+                        <br />
+                        @Html.ActionLink("Back to Schedule", "Index")
+                    </td>
+
+                </tr>
+            </table>
         }
     </div>
 </body>

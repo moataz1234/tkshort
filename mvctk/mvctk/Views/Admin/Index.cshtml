@@ -10,7 +10,9 @@
 </head>
 <body>
     <p>
-        @Html.ActionLink("Add Course","AddCourse")
+        <br />
+        @Html.ActionLink("Add Course", "AddCourse")
+        <br />
     </p>
     <table class="table">
         <tr>
@@ -50,48 +52,48 @@
 
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelutem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Points)
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelutem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Points)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.LecturerID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExamA)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExamB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.startlec)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.endlec)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Day)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClassRoom)
-            </td>
-            <td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LecturerID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExamA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExamB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.startlec)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endlec)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Day)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassRoom)
+                </td>
+                <td>
 
-                @Html.ActionLink("Edit Time Schedule", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Edit Time Schedule", "Edit", new { id = item.ID }) |
 
-                @Html.ActionLink("Edit Exam Schedule", "EditExam", new { id = item.ID }) |
+                    @Html.ActionLink("Edit Exam Schedule", "EditExam", new { id = item.ID }) |
 
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
 
-            </td>
-        </tr>
+                </td>
+            </tr>
         }
 
     </table>
