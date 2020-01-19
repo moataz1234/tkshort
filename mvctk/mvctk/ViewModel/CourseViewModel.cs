@@ -8,7 +8,7 @@ namespace mvctk.ViewModel
 {
     public class CourseViewModel
     {
-        public  course course { get; set; }
-        public List<course> courses { get; set; }
+        public  grade g { get; set; }
+        public List<grade> gs { get; set; }
     }
 }

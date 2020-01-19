@@ -157,17 +157,14 @@ namespace mvctk.Controllers
                         }
                         else
                             ModelState.AddModelError("CourseID", "There are conflict with onther course at the same time");
-
                     }
                     else
                         ModelState.AddModelError("CourseID", "Already having this Course");
-
                 }
                 else
                 {
                     ModelState.AddModelError("StudentID", "The student id is incorrect");
                     ModelState.AddModelError("CourseID", "The course id is incorrect");
-
                 }
             }
             else

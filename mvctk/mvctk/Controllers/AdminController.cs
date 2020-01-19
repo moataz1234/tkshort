@@ -55,8 +55,16 @@ namespace mvctk.Controllers
                                     if (c.startlec.Equals(course.startlec) || (start >= cstart && start < cend) || (end > cstart && end <= cend))
                                         flag2 = 1;
                                 }
-                                if (course.ClassRoom.Equals(c.ClassRoom))
-                                    classroomflag = 1;
+                            }
+                    foreach (course c in DB.courses)
+                        if (course.ID.Equals(c.ID))
+                            if (c.Day.Equals(course.Day))
+                            {
+                                start = Int32.Parse(c.startlec.Substring(0, 2));
+                                end = Int32.Parse(c.endlec.Substring(0, 2));
+                                if (c.startlec.Equals(course.startlec) || (start >= cstart && start < cend) || (end > cstart && end <= cend))
+                                    if (course.ClassRoom.Equals(c.ClassRoom))
+                                        classroomflag = 1;
                             }
                     //======first check==========
                     DateTime ExamA = course.ExamA;
@@ -104,11 +112,11 @@ namespace mvctk.Controllers
                                             if (classroomflag == 0)
                                             {
 
-                                            DB.courses.Add(course);
+                                                DB.courses.Add(course);
 
-                                            DB.SaveChanges();
+                                                DB.SaveChanges();
 
-                                            return RedirectToAction("Index");
+                                                return RedirectToAction("Index");
                                             }
                                             else
                                                 ModelState.AddModelError("ClassRoom", "There are another lecture in this Class");
